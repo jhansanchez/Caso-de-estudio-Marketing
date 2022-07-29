@@ -40,9 +40,20 @@ create table movies_final as select
 a.*,
 b.*
 from movies1 a inner join
-movies_sel b on a.movieId = b.movieId
+movies_sel b on a.movieId = b.movieId;
 
 
 
+--drop table if exists movies2;
+--create table movies2 as select movieId, title, 
+                       -- from movies;
 
+
+
+--drop table if exists rating_movies;
+
+--create table rating_movies as 
+--select  a.*, b.*
+--from ratings1 a left join
+--movies1 b on a.movieId = b.movieId;
 
