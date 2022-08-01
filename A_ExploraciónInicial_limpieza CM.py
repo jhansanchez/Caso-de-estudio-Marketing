@@ -8,7 +8,7 @@ import plotly.graph_objs as go ### gráficos
 import funciones as fn ### para funciones
 from mlxtend.preprocessing import TransactionEncoder #para separar los generos
 from datetime import datetime # para el cambio de formato a fecha
-from surprise import Reader 
+#from surprise import Reader 
 
 import os  ### para ver y cambiar directorio de trabajo
 os.getcwd()

@@ -44,7 +44,7 @@ movies_sel b on a.movieId = b.movieId;
 
 
 
---drop table if exists movies2;
+drop table if exists movies2;
 --create table movies2 as select movieId, title, 
                        -- from movies;
 
