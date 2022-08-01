@@ -7,7 +7,7 @@ import pandas as pd ### para manejo de datos
 import sqlite3 as sql ### conexión con SQL
 import plotly.graph_objs as go ### gráficos
 import funciones as fn ### para funciones
-from mlxtend.preprocessing import TransactionEncoder #para separar los generos
+from mlxtend.preprocessing import TransactionEncoder #para separar los géneros
 from datetime import datetime # para el cambio de formato a fecha
 from surprise import Reader 
 
@@ -45,10 +45,26 @@ go.Figure(data,Layout)
 
 
 ############################ Conteo de los generos ###########################
- 
+cr= pd.read_sql('''select
+             sum(Action) as Action, sum(Adventure) as Adventure, sum(Animation) as Animation, sum(Children) as Children,
+            sum(Comedy) as Comedy, sum(Crime) as Crime, sum(Documentary) as Documentary, sum(Drama) as Drama,
+            sum(Fantasy) as Fantasy, sum("Film-Noir") as FilmNoir, sum(Horror) as Horror, sum(IMAX) as IMAX,
+            sum(Musical) as Musical, sum(Mystery) as Mystery, sum(Romance) as Romance, 
+            sum("Sci-Fi") as SciFi, sum(Thriller) as Thriller, sum(War) as War, sum(Western) as Western
+            from movie2
+            ''', conn)
 
-##Los generos más éxitosos de la plataforma de películas son: drama, comedia y acción. Por otro lado,
-##los generos con menos participación son: documentales, cine negro y películas del oeste
+cr1= cr.transpose()
+cr1 = cr1.rename(columns={0: 'conteo'})
+cr1 =cr1.rename(columns={'': 'generos'}).reset_index()
+cr1 = cr1.rename(columns={"index": 'generos'})
+
+data  = go.Bar( x=cr1.generos ,y=cr1.conteo, text=cr1.conteo, textposition="outside")
+Layout=go.Layout(title="count of genres ",xaxis={'title':'genres'},yaxis={'title':'Count'})
+go.Figure(data,Layout) 
+##Los géneros más éxitosos de la plataforma de películas son: drama, comedia y acción. Por otro lado,
+##los géneros con menos participación son: documentales, cine negro y películas del oeste
+
 
 ##################### Número de lanzamientos por año ########################
 base = rating_movies.groupby(['premiereYear'])[['movieId']].count().sort_values('premiereYear', ascending= True).reset_index()
@@ -59,7 +75,7 @@ go.Figure(data, Layout)
 
 ##En este gráfico se puede observar registros desde el 1922 hasta el 2018, donde el año con el mayor número de lanzamientos fue el del 1995, 
 ##con 5602 estrenos cinematográficos, después de lograrse ese pico, comienza a descender hasta tener 
-## menos de 500 lanzamientos, esto entendido, no como estrenos en general en el mundo, sino solo 
+##menos de 500 lanzamientos, esto entendido, no como estrenos en general en el mundo, sino solo 
 ##las producciones que ingresan a la plataforma.
 
 
@@ -76,10 +92,10 @@ fig.add_trace(go.Scatter(
 fig.update_layout(title_text='behavior of views by year ', xaxis={'title':'Year'},yaxis={'title':'Count'}, title_x=0.5, width=1200)
 fig.show()
 
-##El gráfico muestra registros desde el 1996, es decir que  apartir de ese año se comenzaron a subir 
+##El gráfico muestra registros desde el 1996, es decir que  a partir de ese año se comenzaron a subir 
 ##películas en la plataforma, el año con mayor número de vistas fue el 2000 con 7971 vistas, desde la apertura
 ##se ha tenido mucha variación respecto a las vistas, por lo que no se encuentra algún patrón importante. Adicionalmente,
-##se esperaba mayor protagonismo por parte de los últimos años, debido al boom que ha tenido las plataformas de películas. 
+##se esperaba mayor protagonismo por parte de los últimos años, debido al boom que han tenido las plataformas de películas. 
 
 
 ################### Número de calificaciones por puntaje #####################
