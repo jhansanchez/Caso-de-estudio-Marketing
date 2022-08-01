@@ -12,8 +12,6 @@ from mlxtend.preprocessing import TransactionEncoder ### para separar los géner
 from datetime import datetime ### para el cambio de formato a fecha
  
 #### Paquete para sistemas de recomendación surprise
-#### Puede generar problemas en instalación local de pyhton. Genera error instalando con pip
- 
 from surprise import Reader, Dataset
 from surprise.model_selection import cross_validate, GridSearchCV
 from surprise import KNNBasic, KNNWithMeans, KNNWithZScore, KNNBaseline, SVD
@@ -42,9 +40,7 @@ rating_movies =pd.read_sql('select * from  rating_movies',conn)
 ##########################################################################
 ######## 1. Sistema de recomendación basado en contenido - Manual ########
 ##########################################################################
- 
 movies=pd.read_sql('select* from movie2',conn).drop(['index'], axis = 1)
- 
 movies.info()
 movies['premiere_year']=movies.premiere_year.astype('int')
 movies.info()
@@ -89,7 +85,6 @@ print(interact(recomendacion))
 #############################################################################
 ##### 2. Sistema de recomendación filtro colaborativo basado en usuario #####
 #############################################################################
- 
 ratings=pd.read_sql('select * from ratings2', conn)
 
 ###### leer datos desde tabla de pandas
@@ -267,6 +262,10 @@ print(interact(recomendar))
 # implementar otros modelos basados en la popularidad, en donde se recolecten datos del número 
 # de vistas de cada película, de manera que sea posible crear un top de las películas más vistas 
 # por todos los usuarios.
+
+# Adicionalmente, es pertinente que la empresa encargada de gestionar la plataforma, revise las
+# tendencias y la interacción que tienen los usuarios con las películas, para el ingreso y salida
+# de cintas cinematográficas. 
 
 # Finalmente, debido a que la empresa se encuentra implementando técnicas de Machine Learning para 
 # mejorar su plataforma, más adelante puede tener en cuenta recolectar otro tipo de datos para la
