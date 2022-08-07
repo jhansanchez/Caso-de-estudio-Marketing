@@ -259,7 +259,7 @@ print(interact(recomendar))
 # empresa, puesto que todos tienen un enfoque diferente para brindan las recomendaciones.
 
 # Por otro lado, para el problema de la plataforma online de películas también se pueden 
-# implementar otros modelos basados en la popularidad, en donde se recolecten datos del número 
+# implementar otros modelos basados en la popularidad, en donde se calculen datos del número 
 # de vistas de cada película, de manera que sea posible crear un top de las películas más vistas 
 # por todos los usuarios.
 

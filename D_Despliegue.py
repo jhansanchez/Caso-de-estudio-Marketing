@@ -79,7 +79,7 @@ def recomendar(userId=list(usuarios['userId'].value_counts().index)):
     return recomend_b
 
 
-recomendar(610)
+#recomendar(610)
 
 print(interact(recomendar))
 
@@ -87,16 +87,18 @@ print(interact(recomendar))
 ##### Generar base con recomendaciones por usuario ####
 ########################################################
 
-lista = usuarios["userId"]
-for i in lista:
-    recomendaciones=recomendar(i)
-    recomendaciones["userId"]= i
+recomendaciones=recomendar(1)
+recomendaciones["userId"]= 1
+
+for i in range(2, 611):
+    recomendaciones1= recomendar(i)
+    recomendaciones1["userId"]= i
+    recomendaciones = pd.concat([recomendaciones, recomendaciones1])
     
 
-
-user_id=610
-recomendaciones=recomendar(610)
-recomendaciones["user_id"]=user_id
+#user_id=610
+#recomendaciones=recomendar(610)
+#recomendaciones["user_id"]=user_id
 
 recomendaciones.to_excel('recomendaciones.xlsx',index=False)
 recomendaciones.to_csv('recomendaciones.csv',index=False)
